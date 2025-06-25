@@ -10,21 +10,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Setup Godot
-      uses: lihop/setup-godot@v1
-      with:
-        version: 4.1.1
-        export-templates: true
+      - uses: chickensoft-games/setup-godot@v2
+        name: Setup Godot
+        with:
+          # Version must include major, minor, and patch, and be >= 4.0.0
+          # Pre-release label is optional.
+          version:
+            4.0.0 # also valid: 4.0.0.rc1 or 4.0.0 or "global.json", etc
+            # Use .NET-enabled version of Godot (the default is also true).
+          use-dotnet:
+            false
+            # Include the Godot Export Templates (the default is false).
+          include-templates: true
 
-    - name: Export Project (Windows)
-      run: |
-        mkdir -p build/windows
-        godot --headless --export-release "Windows Desktop" build/windows/EXILED.exe
+      - name: Export Project (Windows)
+        run: |
+          mkdir -p build/windows
+          godot --headless --export-release "Windows Desktop" build/windows/EXILED.exe
 
-    - name: Upload Build Artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: Windows Build
-        path: build/windows/
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Windows Build
+          path: build/windows/
