@@ -1,0 +1,30 @@
+name: Export Godot Game
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  export:
+    name: Export for Windows
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup Godot
+      uses: lihop/setup-godot@v1
+      with:
+        version: 4.1.1
+        export-templates: true
+
+    - name: Export Project (Windows)
+      run: |
+        mkdir -p build/windows
+        godot --headless --export-release "Windows Desktop" build/windows/EXILED.exe
+
+    - name: Upload Build Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: Windows Build
+        path: build/windows/
