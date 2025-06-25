@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://byo7bvvdwux1w"]
+
+[ext_resource type="PackedScene" uid="uid://wfbhgmgplwpg" path="res://hand_fps_d.glb" id="1_u4p2i"]
+
+[node name="hand_fps_d" instance=ExtResource("1_u4p2i")]
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/1/position = Vector3(1.74078e-07, 1.4694, -1.15279e-08)
+bones/1/rotation = Quaternion(0.969681, -0.108856, -0.00875713, 0.218616)
+bones/1/scale = Vector3(1, 1, 1)
+bones/3/position = Vector3(-0.031094, 1.31842, -0.157525)
+bones/3/rotation = Quaternion(0.214643, 0.0719034, 0.0140055, 0.973942)
+bones/3/scale = Vector3(1.00984, 0.939637, 1.59765)
+bones/5/position = Vector3(0.169048, 1.71427, 0.774947)
+bones/5/rotation = Quaternion(0.878982, 0.385493, 0.243271, -0.140015)
+bones/5/scale = Vector3(0.999999, 0.999999, 1)
+bones/7/position = Vector3(-9.43374e-08, 1.36065, 8.77018e-08)
+bones/7/rotation = Quaternion(0.681084, 0.363656, -0.542874, -0.330403)
+bones/7/scale = Vector3(1, 1, 1)
+bones/9/position = Vector3(-0.0398797, 1.33207, -0.0285542)
+bones/9/rotation = Quaternion(0.00661318, -0.0318853, -0.0770452, 0.996496)
+bones/9/scale = Vector3(1.49324, 0.977206, 1.24792)
+
+[node name="fingertip" type="Marker3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.19024, -0.0138026, 18.7568)

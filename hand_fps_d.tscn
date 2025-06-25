@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://b712lnpoglycs"]
+
+[ext_resource type="PackedScene" uid="uid://wfbhgmgplwpg" path="res://hand_fps_d.glb" id="1_5re48"]
+
+[node name="hand_fps_d" instance=ExtResource("1_5re48")]

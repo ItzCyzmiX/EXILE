@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://btneyvfxg0v7p"]
+
+[ext_resource type="PackedScene" uid="uid://byo7bvvdwux1w" path="res://hand.tscn" id="1_sywtx"]
+
+[node name="hand_fps_d" instance=ExtResource("1_sywtx")]
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/1/position = Vector3(2.64431e-07, 1.4694, -1.0053e-07)
+bones/1/rotation = Quaternion(0.111223, 0.027173, -0.142361, 0.983171)
+bones/3/position = Vector3(-0.0310939, 1.31842, -0.157525)
+bones/3/rotation = Quaternion(0.219802, 0.0526007, 0.0694452, 0.971647)
+bones/3/scale = Vector3(1, 1, 1)
+bones/5/rotation = Quaternion(0.211896, 0.143676, 0.478265, 0.840071)
+bones/5/scale = Vector3(0.999998, 0.999999, 1)
+bones/7/position = Vector3(-2.17205e-08, 1.36065, -7.55558e-08)
+bones/7/rotation = Quaternion(0.0227703, 0.227376, 0.405054, 0.885276)
+bones/7/scale = Vector3(1, 1, 0.999999)
+bones/9/position = Vector3(-0.0398797, 1.33207, -0.0285541)
+bones/9/rotation = Quaternion(-0.112113, -0.0157609, -0.154464, 0.98149)
+bones/9/scale = Vector3(1, 1, 1)

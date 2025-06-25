@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://f3wnwammu15g"]
+
+[ext_resource type="PackedScene" uid="uid://lwx173ihvks" path="res://eye_ball.glb" id="1_0wmew"]
+[ext_resource type="Script" uid="uid://cd632a1pe0w1e" path="res://eye_anim.gd" id="2_apgtm"]
+
+[node name="eye_ball" instance=ExtResource("1_0wmew")]
+
+[node name="Icosphere_001" parent="." index="0"]
+script = ExtResource("2_apgtm")
+
+[node name="Sphere_003" parent="Icosphere_001" index="1"]
+transform = Transform3D(0.291668, 0, 0, 0, 0.306071, 0, 0, 0, 0.438906, 0, 0, -0.816505)
+
+[node name="eye" type="Timer" parent="." index="1"]
+wait_time = 0.5
+
+[connection signal="timeout" from="eye" to="Icosphere_001" method="_on_eye_timeout"]

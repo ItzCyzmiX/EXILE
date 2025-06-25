@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://du1xw6fwlo0yf"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_rtl8c"]
+radius = 0.234824
+
+[sub_resource type="SphereMesh" id="SphereMesh_v7oki"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v8qja"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+
+[node name="Bullet" type="RigidBody3D"]
+gravity_scale = 0.0
+continuous_cd = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.03904, 0, 0, 0, 0.964353, 0, 0, 0, 0.911981, -0.00267726, 0.0150161, -0.00626266)
+shape = SubResource("SphereShape3D_rtl8c")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1.5474e-08, -0.360837, 0, 0.354004, -1.57727e-08, 0, 0, 0, 0.362683, 0, 0, 0)
+mesh = SubResource("SphereMesh_v7oki")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_v8qja")
