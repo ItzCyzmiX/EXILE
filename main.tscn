@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8su43o2g8ra1"]
+[gd_scene load_steps=3 format=3 uid="uid://b8su43o2g8ra1"]
 
 [ext_resource type="Script" uid="uid://bq6tjwcf7oaia" path="res://main.gd" id="1_0xm2m"]
-[ext_resource type="Shader" uid="uid://w5gblly5sqik" path="res://post_processing.gdshader" id="3_h2yge"]
 
 [sub_resource type="Environment" id="Environment_0xm2m"]
 background_color = Color(0.220301, 0.0561662, 0, 1)
@@ -13,30 +12,10 @@ fog_enabled = true
 fog_light_color = Color(0.320366, 1.07392e-06, 0.00146678, 1)
 fog_sky_affect = 0.916
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_h2yge"]
-shader = ExtResource("3_h2yge")
-
-[sub_resource type="QuadMesh" id="QuadMesh_1bvp3"]
-lightmap_size_hint = Vector2i(52, 52)
-size = Vector2(1289, 800)
-center_offset = Vector3(635, 380, 0)
-
 [node name="main" type="Node3D"]
 script = ExtResource("1_0xm2m")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 15.5226, 0)
-visible = false
-light_color = Color(1, 0.407246, 0.338652, 1)
-shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_0xm2m")
 
 [node name="world" type="Node3D" parent="."]
-
-[node name="MeshInstance2D2" type="MeshInstance2D" parent="."]
-visible = false
-material = SubResource("ShaderMaterial_h2yge")
-position = Vector2(5, -3)
-mesh = SubResource("QuadMesh_1bvp3")

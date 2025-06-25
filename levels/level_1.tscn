@@ -25,12 +25,6 @@ transform = Transform3D(4.39513, 0, 0, 0, 1, 0, 0, 0, 1, 29.799, -0.535143, 3.50
 size = Vector3(17.4604, 1, 25.3865)
 material = SubResource("StandardMaterial3D_jirdo")
 
-[node name="CSGBox3D5" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.831383, 8.2268, 3.50681)
-visible = false
-size = Vector3(17.4604, 1, 25.3865)
-material = SubResource("StandardMaterial3D_jirdo")
-
 [node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D"]
 transform = Transform3D(4.37114e-08, -4.37114e-08, 4.39513, -1, 8.74228e-08, 1.92117e-07, -8.74228e-08, -1, -1.92117e-07, 28.8798, 3.54239, 16.1711)
 size = Vector3(9.32983, 1.47531, 19.9115)
