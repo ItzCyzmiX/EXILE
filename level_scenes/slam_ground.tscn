@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://cpv17f3wjc04o"]
+
+[ext_resource type="Script" uid="uid://bcqwkg0vjmg88" path="res://level_scenes/ground.gd" id="2_wj1gl"]
+[ext_resource type="Texture2D" uid="uid://cpq4k8y23dhdh" path="res://materials/gritty.png" id="3_iidin"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hjqcs"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_60mhm"]
+albedo_texture = ExtResource("3_iidin")
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_hi8uk"]
+material = SubResource("StandardMaterial3D_60mhm")
+
+[node name="Ground" type="Node3D"]
+
+[node name="slam_ground_body" type="CharacterBody3D" parent="."]
+motion_mode = 1
+slide_on_ceiling = false
+script = ExtResource("2_wj1gl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="slam_ground_body"]
+shape = SubResource("BoxShape3D_hjqcs")
+debug_color = Color(0, 0.6, 0.701961, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="slam_ground_body"]
+mesh = SubResource("BoxMesh_hi8uk")

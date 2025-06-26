@@ -6,6 +6,7 @@ func _ready() -> void:
 	var level = load("res://levels/level_" + str(cur_lvl) + ".tscn").instantiate()
 	var player = preload("res://player.tscn").instantiate()
 	player.position = level.get_node("player_spawn").position 
+	player.get_node("head").rotation = level.get_node("player_spawn").rotation 
 	world.add_child(level)
 	world.add_child(player)	
 func _unhandled_input(event: InputEvent) -> void:

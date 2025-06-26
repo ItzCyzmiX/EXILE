@@ -1,21 +1,76 @@
-[gd_scene load_steps=3 format=3 uid="uid://b8su43o2g8ra1"]
+[gd_scene load_steps=9 format=3 uid="uid://b8su43o2g8ra1"]
 
 [ext_resource type="Script" uid="uid://bq6tjwcf7oaia" path="res://main.gd" id="1_0xm2m"]
+[ext_resource type="Shader" uid="uid://w5gblly5sqik" path="res://post_processing.gdshader" id="2_0xm2m"]
+[ext_resource type="AudioStream" uid="uid://h4488t3b7wea" path="res://exile_but_better.mp3" id="3_h2yge"]
 
-[sub_resource type="Environment" id="Environment_0xm2m"]
-background_color = Color(0.220301, 0.0561662, 0, 1)
-glow_enabled = true
-glow_intensity = 4.42
-glow_strength = 1.74
-glow_hdr_luminance_cap = 84.76
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_h2yge"]
+sky_top_color = Color(0.384314, 0, 0, 1)
+sky_horizon_color = Color(0.358304, 0.254476, 0.245476, 1)
+ground_horizon_color = Color(0.358304, 0.254476, 0.245476, 1)
+
+[sub_resource type="Sky" id="Sky_1bvp3"]
+sky_material = SubResource("ProceduralSkyMaterial_h2yge")
+
+[sub_resource type="Environment" id="Environment_lquwl"]
+background_mode = 1
+background_color = Color(0.686275, 0.431373, 0.431373, 1)
+sky = SubResource("Sky_1bvp3")
 fog_enabled = true
-fog_light_color = Color(0.320366, 1.07392e-06, 0.00146678, 1)
-fog_sky_affect = 0.916
+fog_light_color = Color(0.306236, 0.14924, 0.141979, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0xm2m"]
+shader = ExtResource("2_0xm2m")
+
+[sub_resource type="QuadMesh" id="QuadMesh_h2yge"]
+size = Vector2(1280, 720)
+center_offset = Vector3(640, 360, 0)
 
 [node name="main" type="Node3D"]
 script = ExtResource("1_0xm2m")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_0xm2m")
+environment = SubResource("Environment_lquwl")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
 
 [node name="world" type="Node3D" parent="."]
+
+[node name="MeshInstance2D2" type="MeshInstance2D" parent="."]
+material = SubResource("ShaderMaterial_0xm2m")
+scale = Vector2(0.989212, 1.00966)
+mesh = SubResource("QuadMesh_h2yge")
+
+[node name="CanvasLayer" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_h2yge")
+volume_db = -10.0
+autoplay = true
+parameters/looping = true

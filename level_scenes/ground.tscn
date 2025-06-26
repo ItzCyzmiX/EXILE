@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://df0t0umyq78f3"]
+
+[ext_resource type="Texture2D" uid="uid://cpq4k8y23dhdh" path="res://materials/gritty.png" id="1_cwq0c"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hjqcs"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_60mhm"]
+albedo_texture = ExtResource("1_cwq0c")
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_hi8uk"]
+material = SubResource("StandardMaterial3D_60mhm")
+
+[node name="Ground" type="Node3D"]
+
+[node name="ground_body" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ground_body"]
+shape = SubResource("BoxShape3D_hjqcs")
+debug_color = Color(0, 0.6, 0.701961, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ground_body"]
+mesh = SubResource("BoxMesh_hi8uk")
