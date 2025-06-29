@@ -15,7 +15,9 @@ material = SubResource("StandardMaterial3D_60mhm")
 
 [node name="Ground" type="Node3D"]
 
-[node name="slam_ground_body" type="CharacterBody3D" parent="."]
+[node name="slam_ground_body" type="CharacterBody3D" parent="." groups=["solid_ground"]]
+collision_layer = 3
+collision_mask = 3
 motion_mode = 1
 slide_on_ceiling = false
 script = ExtResource("2_wj1gl")

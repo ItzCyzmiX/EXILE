@@ -10,7 +10,7 @@
 height = 1.78201
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_sweqy"]
-size = Vector3(0.913086, 0.0587158, 1)
+size = Vector3(1.25372, 0.0830381, 1.22949)
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_onrkg")
@@ -19,6 +19,7 @@ script = ExtResource("1_onrkg")
 shape = SubResource("CapsuleShape3D_sweqy")
 
 [node name="head" type="Node3D" parent="."]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 0, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.528334, 0)
@@ -27,21 +28,25 @@ script = ExtResource("2_sweqy")
 
 [node name="hand" type="Sprite3D" parent="head/Camera3D"]
 transform = Transform3D(0.0476722, 0, -0.0642445, 0, 0.08, 0, 0.0642445, 0, 0.0476722, 0.216069, -0.120264, -0.38604)
-shaded = true
+cast_shadow = 0
 texture_filter = 0
 texture = ExtResource("5_2hs0m")
 
 [node name="Marker3D" type="Marker3D" parent="head/Camera3D/hand"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.28031, 1.101, -8.68511)
+transform = Transform3D(1, 0, -5.96046e-08, 0, 1, 0, 5.96046e-08, 0, 1, -1.06074, 0.84591, -1.90026)
 
 [node name="eye_ball_hand" type="Sprite3D" parent="head/Camera3D"]
 transform = Transform3D(0.0622044, 0, 0.0650432, 0.00843243, 0.0892405, -0.0080644, -0.0644942, 0.0116679, 0.0616794, -0.286863, -0.136092, -0.450099)
-shaded = true
+cast_shadow = 0
 texture_filter = 0
 texture = ExtResource("6_1jxqw")
 
 [node name="eye_ball2" parent="head/Camera3D" instance=ExtResource("4_sweqy")]
-transform = Transform3D(-0.0509115, -0.00512678, -0.0313326, -0.00113774, 0.0594691, -0.00788188, 0.0317289, -0.00609387, -0.0505583, -0.220741, -0.0550629, -0.36198)
+transform = Transform3D(-0.0447093, -0.00452323, -0.0397569, -0.00585494, 0.0597132, -0.000209439, 0.0395828, 0.00372351, -0.0449371, -0.2, -0.0389598, -0.362)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="head/Camera3D"]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 0, -0.528334, 0)
+light_color = Color(1, 0.452416, 0.383959, 1)
 
 [node name="DashCountdown" type="Timer" parent="."]
 wait_time = 3.0
@@ -50,8 +55,11 @@ wait_time = 3.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.077729, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00732422, -0.867206, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00363158, -0.879367, -0.0297852)
 shape = SubResource("BoxShape3D_sweqy")
 
 [connection signal="timeout" from="DashCountdown" to="." method="_on_dash_countdown_timeout"]
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
+[connection signal="area_shape_entered" from="Area3D" to="." method="_on_area_3d_area_shape_entered"]
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_shape_entered" from="Area3D" to="." method="_on_area_3d_body_shape_entered"]

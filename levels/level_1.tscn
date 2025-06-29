@@ -1,16 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bm1q8r0tor0j7"]
+[gd_scene load_steps=5 format=3 uid="uid://bm1q8r0tor0j7"]
 
 [ext_resource type="PackedScene" uid="uid://df0t0umyq78f3" path="res://level_scenes/ground.tscn" id="1_bt44k"]
 [ext_resource type="PackedScene" uid="uid://cpv17f3wjc04o" path="res://level_scenes/slam_ground.tscn" id="2_jirdo"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vn7o3"]
-albedo_color = Color(1, 0, 0.376471, 1)
-emission_enabled = true
-emission_energy_multiplier = 6.21
-
-[sub_resource type="SphereMesh" id="SphereMesh_vn7o3"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_vn7o3"]
+[ext_resource type="PackedScene" uid="uid://10imfh2mgx2b" path="res://ennemies/_scrapper.tscn" id="3_bt44k"]
+[ext_resource type="PackedScene" uid="uid://c1bprsqxaal1n" path="res://player.tscn" id="4_kx6l7"]
 
 [node name="Level1" type="Node3D"]
 
@@ -24,30 +17,12 @@ shadow_enabled = true
 [node name="player_spawn" type="Marker3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 24.2295, 7.12228, 13.6517)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.984, 2.73549, 12.9208)
-material_override = SubResource("StandardMaterial3D_vn7o3")
-gi_mode = 2
-mesh = SubResource("SphereMesh_vn7o3")
-skeleton = NodePath("")
-
-[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="MeshInstance3D"]
-transform = Transform3D(-0.989852, -0.0110511, -0.141673, 0.141547, 0.0114425, -0.989865, 0.0125602, -0.999873, -0.00976214, 0.0748501, 0.715896, -0.0456266)
-light_color = Color(1, 0.621042, 0.563658, 1)
-light_indirect_energy = 3.0
-directional_shadow_mode = 1
-sky_mode = 1
-
-[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
-shape = SubResource("SphereShape3D_vn7o3")
-
 [node name="Ground2" parent="." instance=ExtResource("1_bt44k")]
 transform = Transform3D(30, 0, 0, 0, 1, 0, 0, 0, 30, 17.1812, 0, 11.3697)
 
 [node name="Ground3" parent="." instance=ExtResource("1_bt44k")]
 transform = Transform3D(30, 0, 0, 0, 1, 0, 0, 0, 30, 17.1812, 10.5117, 11.3697)
+visible = false
 
 [node name="Ground4" parent="." instance=ExtResource("1_bt44k")]
 transform = Transform3D(32, 0, 0, 0, 10, 0, 0, 0, 1, 17.0524, 5.21067, -2.39608)
@@ -63,3 +38,9 @@ transform = Transform3D(-1.39876e-06, 0, -1, 0, 10, 0, 32, 0, -4.37114e-08, 31.3
 
 [node name="Ground" parent="." instance=ExtResource("2_jirdo")]
 transform = Transform3D(7, 0, 0, 0, 1, 0, 0, 0, 7, 24.0529, 4.57938, 11.2991)
+
+[node name="Player" parent="." instance=ExtResource("4_kx6l7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.0152, 8.35143, 10.564)
+
+[node name="_scrapper" parent="." instance=ExtResource("3_bt44k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.8993, 0.714949, 6.24014)

@@ -6,6 +6,7 @@
 [node name="eye_ball" instance=ExtResource("1_0wmew")]
 
 [node name="Icosphere_001" parent="." index="0"]
+cast_shadow = 0
 script = ExtResource("2_apgtm")
 
 [node name="Sphere_003" parent="Icosphere_001" index="1"]

@@ -1,24 +1,73 @@
-[gd_scene load_steps=4 format=3 uid="uid://du1xw6fwlo0yf"]
+[gd_scene load_steps=11 format=3 uid="uid://du1xw6fwlo0yf"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_rtl8c"]
-radius = 0.234824
+[ext_resource type="Script" uid="uid://bdnbl3ixkjhqy" path="res://bullet.gd" id="1_v7oki"]
+[ext_resource type="Material" uid="uid://bnf27bv4w67rc" path="res://ennemies/explosion.tres" id="2_v8qja"]
 
-[sub_resource type="SphereMesh" id="SphereMesh_v7oki"]
+[sub_resource type="BoxMesh" id="BoxMesh_v7oki"]
+size = Vector3(0.5, 0.5, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v8qja"]
 emission_enabled = true
 emission = Color(1, 1, 1, 1)
 
-[node name="Bullet" type="RigidBody3D"]
-gravity_scale = 0.0
-continuous_cd = true
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v8qja"]
+velocity_pivot = Vector3(0, 1, 0)
+gravity = Vector3(0, -0.5, 10)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1.03904, 0, 0, 0, 0.964353, 0, 0, 0, 0.911981, -0.00267726, 0.0150161, -0.00626266)
-shape = SubResource("SphereShape3D_rtl8c")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t4vbm"]
+metallic_specular = 0.0
+emission_enabled = true
+emission = Color(0.691357, 0.691357, 0.691357, 1)
+emission_energy_multiplier = 3.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_2b2rl"]
+material = SubResource("StandardMaterial3D_t4vbm")
+size = Vector3(0.05, 0.05, 0.05)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v7oki"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2b2rl"]
+shading_mode = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_b7duk"]
+material = SubResource("StandardMaterial3D_2b2rl")
+size = Vector3(0.1, 0.1, 0.1)
+
+[node name="Bullet" type="RigidBody3D"]
+script = ExtResource("1_v7oki")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(-1.5474e-08, -0.360837, 0, 0.354004, -1.57727e-08, 0, 0, 0, 0.362683, 0, 0, 0)
-mesh = SubResource("SphereMesh_v7oki")
+transform = Transform3D(1.02658e-16, 2.23859e-08, -0.0695829, 0.0537285, -2.23859e-08, 0, -2.34855e-09, -0.51213, -3.04157e-09, 0, 0, 0)
+mesh = SubResource("BoxMesh_v7oki")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_v8qja")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(-0.989846, 0.142145, 0, -0.142145, -0.989846, 0, 0, 0, 1, 0.00602694, 0, 0.146975)
+visible = false
+amount = 3
+process_material = SubResource("ParticleProcessMaterial_v8qja")
+draw_pass_1 = SubResource("BoxMesh_2b2rl")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(0.266174, 0, 0, 0, 0.0998117, 0, 0, 0, 0.0907206, -0.00371927, 0, 0)
+shape = SubResource("BoxShape3D_v7oki")
+
+[node name="break" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 10
+one_shot = true
+explosiveness = 1.0
+randomness = 0.17
+process_material = ExtResource("2_v8qja")
+draw_pass_1 = SubResource("BoxMesh_b7duk")
+
+[connection signal="area_shape_entered" from="Area3D" to="." method="_on_area_3d_area_shape_entered"]
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_shape_entered" from="Area3D" to="." method="_on_area_3d_body_shape_entered"]
+[connection signal="finished" from="break" to="." method="_on_break_finished"]

@@ -1,8 +1,15 @@
-[gd_scene load_steps=9 format=3 uid="uid://b8su43o2g8ra1"]
+[gd_scene load_steps=17 format=3 uid="uid://b8su43o2g8ra1"]
 
 [ext_resource type="Script" uid="uid://bq6tjwcf7oaia" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="Shader" uid="uid://w5gblly5sqik" path="res://post_processing.gdshader" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://f3gmmfi1i3ou" path="res://ui.gd" id="3_272bh"]
 [ext_resource type="AudioStream" uid="uid://h4488t3b7wea" path="res://exile_but_better.mp3" id="3_h2yge"]
+[ext_resource type="Texture2D" uid="uid://d1ciiibv6rmsd" path="res://ui/health_bar_border.png" id="3_lquwl"]
+[ext_resource type="Texture2D" uid="uid://r86q618j2l8e" path="res://ui/health_bar.png" id="4_7mycd"]
+[ext_resource type="Texture2D" uid="uid://13plmn6cperp" path="res://ui/dash_full.png" id="5_7mycd"]
+[ext_resource type="Script" uid="uid://cc5hdb31rsbq1" path="res://crosshair.gd" id="7_4c57u"]
+[ext_resource type="Texture2D" uid="uid://c6cnm7jto3wg6" path="res://ui/ArrowRight.png" id="7_kek77"]
+[ext_resource type="Texture2D" uid="uid://ueruybu8q3dx" path="res://ui/ArrowLeft.png" id="8_4c57u"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_h2yge"]
 sky_top_color = Color(0.384314, 0, 0, 1)
@@ -14,10 +21,16 @@ sky_material = SubResource("ProceduralSkyMaterial_h2yge")
 
 [sub_resource type="Environment" id="Environment_lquwl"]
 background_mode = 1
-background_color = Color(0.686275, 0.431373, 0.431373, 1)
+background_color = Color(0.34509, 0.191379, 0.192575, 1)
 sky = SubResource("Sky_1bvp3")
+glow_enabled = true
+glow_normalized = true
+glow_intensity = 5.0
 fog_enabled = true
-fog_light_color = Color(0.306236, 0.14924, 0.141979, 1)
+fog_light_color = Color(0.136623, 0.0527968, 0.0489719, 1)
+adjustment_enabled = true
+adjustment_brightness = 0.8
+adjustment_saturation = 1.2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0xm2m"]
 shader = ExtResource("2_0xm2m")
@@ -25,6 +38,8 @@ shader = ExtResource("2_0xm2m")
 [sub_resource type="QuadMesh" id="QuadMesh_h2yge"]
 size = Vector2(1280, 720)
 center_offset = Vector3(640, 360, 0)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7mycd"]
 
 [node name="main" type="Node3D"]
 script = ExtResource("1_0xm2m")
@@ -40,34 +55,112 @@ shadow_enabled = true
 
 [node name="MeshInstance2D2" type="MeshInstance2D" parent="."]
 material = SubResource("ShaderMaterial_0xm2m")
+position = Vector2(9.00002, -1.99994)
 scale = Vector2(0.989212, 1.00966)
 mesh = SubResource("QuadMesh_h2yge")
 
 [node name="CanvasLayer" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -616.182
+offset_top = -341.246
+offset_right = -1896.18
+offset_bottom = -1061.25
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.3, 0.3)
 mouse_filter = 2
+script = ExtResource("3_272bh")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
-layout_mode = 0
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer"]
+material = SubResource("CanvasItemMaterial_7mycd")
+layout_mode = 2
+offset_left = 2187.27
+offset_top = 2977.49
+offset_right = 3037.27
+offset_bottom = 3161.49
+value = 100.0
+texture_over = ExtResource("3_lquwl")
+texture_progress = ExtResource("4_7mycd")
+texture_progress_offset = Vector2(241, 50)
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control"]
+layout_mode = 2
+offset_left = 2203.94
+offset_top = 3250.82
+offset_right = 2387.94
+offset_bottom = 3420.82
+texture = ExtResource("5_7mycd")
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Control"]
+layout_mode = 2
+offset_left = 2431.94
+offset_top = 3250.82
+offset_right = 2615.94
+offset_bottom = 3420.82
+texture = ExtResource("5_7mycd")
+
+[node name="TextureRect3" type="TextureRect" parent="CanvasLayer/Control"]
+layout_mode = 2
+offset_left = 2659.94
+offset_top = 3250.82
+offset_right = 2843.94
+offset_bottom = 3420.82
+texture = ExtResource("5_7mycd")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1290.0
+offset_bottom = 708.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
 mouse_filter = 2
+script = ExtResource("7_4c57u")
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer/VBoxContainer"]
-layout_mode = 2
+[node name="TextureRect" type="TextureRect" parent="Control"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("7_kek77")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="TextureRect3" type="TextureRect" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
+[node name="TextureRect2" type="TextureRect" parent="Control"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("8_4c57u")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_h2yge")

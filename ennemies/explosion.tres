@@ -1,0 +1,7 @@
+[gd_resource type="ParticleProcessMaterial" format=3 uid="uid://bnf27bv4w67rc"]
+
+[resource]
+lifetime_randomness = 0.3
+spread = 180.0
+initial_velocity_min = 5.0
+initial_velocity_max = 10.0
